@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2bd1cb00c1cf86e4caf7095e8aab004a
+guid: a48460a84d0b71344bc0dd9dd7dc7bbe
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -1154,27 +1154,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Character_sheet_0
-      rect:
-        serializedVersion: 2
-        x: 644
-        y: 458
-        width: 16
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 177d2cebb9b44f84f9905b9d626650a4
-      internalID: -1560557925
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1186,7 +1165,6 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character_sheet_0: -1560557925
       Character_sheet_1: 312947558
       Character_sheet_10: -358593791
       Character_sheet_11: 1474852115

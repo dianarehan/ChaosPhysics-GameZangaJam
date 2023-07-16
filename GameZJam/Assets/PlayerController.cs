@@ -94,9 +94,9 @@ public class PlayerController : MonoBehaviour
         canAttack = true;
     }
 
-    public void TakeDamage(float damageAmount)
+    public void TakeDamage(float damage)
     {
-        currentHP -= (int)damageAmount;
+        currentHP -= (int)damage;
         healthSlider.value = currentHP;
         if (currentHP <= 0)
         {
@@ -276,14 +276,15 @@ public class PlayerController : MonoBehaviour
     {
         // Define the color gradient
         Gradient gradient = new Gradient();
-        GradientColorKey[] colorKeys = new GradientColorKey[5];
+        GradientColorKey[] colorKeys = new GradientColorKey[6];
 
-        // Define the color keys for the gradient in the desired order
-        colorKeys[0] = new GradientColorKey(Color.green, 0f);
-        colorKeys[1] = new GradientColorKey(new Color(0.8f, 1f, 0f), 0.25f); // Light green
-        colorKeys[2] = new GradientColorKey(new Color(1f, 0.85f, 0f), 0.5f); // Light orange
-        colorKeys[3] = new GradientColorKey(new Color(1f, 0.65f, 0f), 0.75f); // Orange
-        colorKeys[4] = new GradientColorKey(Color.red, 1f);
+        // Define the color keys for the gradient
+        colorKeys[0] = new GradientColorKey(Color.red, 0f);            // HP <= 5 - Red
+        colorKeys[1] = new GradientColorKey(new Color(1f, 0.65f, 0f), 0.25f);  // HP <= 10 - Orange
+        colorKeys[2] = new GradientColorKey(new Color(1f, 0.85f, 0f), 0.4f);   // HP <= 20
+        colorKeys[3] = new GradientColorKey(new Color(1f, 1f, 0f), 0.55f);     // HP <= 30
+        colorKeys[4] = new GradientColorKey(new Color(0.8f, 1f, 0f), 0.7f);     // HP <= 40
+        colorKeys[5] = new GradientColorKey(Color.green, 1f);          // HP > 40 - Green
 
         // Define the alpha keys for the gradient (optional)
         GradientAlphaKey[] alphaKeys = new GradientAlphaKey[2];
@@ -300,6 +301,7 @@ public class PlayerController : MonoBehaviour
         // Set the color of the slider fill based on the interpolated color
         healthSlider.fillRect.GetComponent<Image>().color = interpolatedColor;
     }
+
 
 
 }

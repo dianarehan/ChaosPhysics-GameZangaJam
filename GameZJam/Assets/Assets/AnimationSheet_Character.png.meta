@@ -671,6 +671,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: AnimationSheet_Character_4
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 142
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 901247f1f540df74697b1139bffaa52f
+      internalID: 1782811999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -686,6 +707,7 @@ TextureImporter:
       AnimationSheet_Character_1: -2031123511
       AnimationSheet_Character_2: 604381048
       AnimationSheet_Character_3: -768632118
+      AnimationSheet_Character_4: 1782811999
       attack1: -1285980333
       attack2: -868162175
       attack3: -172665275

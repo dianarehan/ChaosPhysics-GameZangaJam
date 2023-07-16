@@ -3,7 +3,7 @@
 public class Fireball : MonoBehaviour
 {
     public float speed = 10f;
-    public int damageAmount = 10;
+    public int damage = 10;
 
     private Rigidbody2D rb;
     private Vector2 direction;
@@ -34,7 +34,7 @@ public class Fireball : MonoBehaviour
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.TakeDamage(damageAmount);
+                enemy.TakeDamage(damage);
 
             }
         }
@@ -53,8 +53,8 @@ using UnityEngine;
 public class Fireball : MonoBehaviour
 {
     public float speed = 10f;
-    public int damageAmount = 10;
-    public float range = 2.5f;
+    public int damage = 10;
+    public float range = 3f;
     public float lifetime = 3f;
 
     private Rigidbody2D rb;
@@ -97,7 +97,7 @@ public class Fireball : MonoBehaviour
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.TakeDamage(damageAmount);
+                enemy.TakeDamage(damage);
                 Destroy(gameObject);
             }
         }
