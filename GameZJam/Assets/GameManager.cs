@@ -13,7 +13,15 @@ public class GameManager : MonoBehaviour
         losePanel.SetActive(false);
         winPanel.SetActive(false);
     }
+    public void EnemyDied()
+    {
+        WinGame(); // Call the WinGame method when an enemy dies
+    }
 
+    public void PlayerDied()
+    {
+        LoseGame(); // Call the LoseGame method when the player dies
+    }
     public void LoseGame()
     {
         // Display the lose panel when the player loses
@@ -45,8 +53,9 @@ public class GameManager : MonoBehaviour
 
     public void LoadMenu()
     {
-        Time.timeScale = 1f;
+        
         SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1f;
     }
 
     public void QuitGame()

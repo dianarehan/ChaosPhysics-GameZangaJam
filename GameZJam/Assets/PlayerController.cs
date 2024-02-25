@@ -155,7 +155,9 @@ public class PlayerController : MonoBehaviour
     private bool isJumping = false;
     private Animator animator;
     public Slider healthSlider;
-
+    private GameManager gameManager;
+    public AudioClip attackSoundEffect;
+    public AudioSource AudioSource;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -164,10 +166,16 @@ public class PlayerController : MonoBehaviour
         healthSlider.maxValue = maxHP;
         healthSlider.value = currentHP;
         UpdateSliderColor();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void Update()
     {
+        if (transform.position.y < -10f)
+        {
+            Die();
+            return;
+        }
         // Check if the player is on the ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
@@ -222,7 +230,10 @@ public class PlayerController : MonoBehaviour
         {
             fireball.GetComponent<Fireball>().SetDirection(Vector2.right);
         }
-
+        if (attackSoundEffect != null)
+        {
+            AudioSource.PlayOneShot(attackSoundEffect);
+        }
         // Prevent immediate attack spamming
         canAttack = false;
         Invoke("ResetAttack", 0.5f);
@@ -250,6 +261,10 @@ public class PlayerController : MonoBehaviour
 
         // Set the "IsDead" parameter to true in the animator
         animator.SetBool("IsDead", true);
+        if (gameManager != null)
+        {
+            gameManager.PlayerDied(); // Notify the game manager that the player has died
+        }
     }
 
     private void Flip()

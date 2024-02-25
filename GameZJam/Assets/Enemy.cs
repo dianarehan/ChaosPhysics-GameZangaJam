@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    private int maxHealth = 100;
+    private int maxHealth = 1000;
     public int currentHealth;
     public Slider healthSlider;
     public float patrolSpeed = 2f;
@@ -24,19 +24,22 @@ public class Enemy : MonoBehaviour
     private bool isAttackCooldown = false;
     public float attackCooldownDuration = 2f;
     private bool canDamagePlayer = true;
-
+    private GameManager gameManager;
     Collider2D armCollider; 
     ContactFilter2D playerFilter;
+    public AudioSource AudioSource;
+    public AudioClip attackSoundEffect;
     private void Start()
     {
+        
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currentHealth;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
+        gameManager = FindObjectOfType<GameManager>();
 
-        
         armCollider = transform.GetChild(0).GetComponent<Collider2D>();
         playerFilter = new ContactFilter2D();
         playerFilter.SetLayerMask(LayerMask.GetMask("Player"));
@@ -131,6 +134,10 @@ public class Enemy : MonoBehaviour
     //this is working
     private void Attack()
     {   armCollider.enabled = true;
+        if (attackSoundEffect != null)
+        {
+            AudioSource.PlayOneShot(attackSoundEffect);
+        }
         Collider2D[] playerToDmg = new Collider2D[2];
         Physics2D.OverlapCollider(armCollider, playerFilter, playerToDmg);
         foreach(Collider2D col in playerToDmg)
@@ -169,7 +176,8 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
-
+        if (attackSoundEffect != null)
+        
         // Update the health slider value
         healthSlider.value = currentHealth;
 
@@ -211,12 +219,29 @@ public class Enemy : MonoBehaviour
         healthSlider.fillRect.GetComponent<Image>().color = interpolatedColor;
     }
     void Die()
-        {
+    {
+        // Trigger the death animation
         animator.SetBool("IsDead", true);
-            Destroy(gameObject,1.5f);
-        }
 
-        void Flip()
+        // Delay the destruction of the enemy object
+        StartCoroutine(DestroyWithDelay());
+    }
+
+    private IEnumerator DestroyWithDelay()
+    {
+        // Wait for a specified delay
+        yield return new WaitForSeconds(1.5f);
+
+        // Destroy the enemy object
+        Destroy(gameObject);
+
+        if (gameManager != null)
+        {
+            gameManager.EnemyDied(); // Notify the game manager that an enemy has died
+        }
+    }
+
+    void Flip()
         {
             isFacingRight = !isFacingRight;
             Vector3 newScale = transform.localScale;

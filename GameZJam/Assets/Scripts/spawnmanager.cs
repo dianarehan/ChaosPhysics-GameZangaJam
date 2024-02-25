@@ -63,7 +63,8 @@ public class spawnmanager : MonoBehaviour
 
     private int platformCount = 0; // Counter for spawned platforms
     private int frameCounter = 0; // Counter for frames
-
+    [SerializeField] int platformsToSpawn = 5; // Number of platforms to spawn before spawning an apple or a trap
+    private int platformsSpawned = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -77,7 +78,7 @@ public class spawnmanager : MonoBehaviour
 
     }
 
-   
+
     void spawnplatforms()
     {
         float xposlimit = 3.44f;
@@ -111,8 +112,53 @@ public class spawnmanager : MonoBehaviour
                 capsuleCollider.enabled = !capsuleCollider.enabled;
             }
         }
-
+    
     }
+    /*void spawnplatforms()
+    {
+        float xposlimit = 3.44f;
+        float xposlimitt = -3.26f;
+        float randomxpos = Random.Range(xposlimit, xposlimitt);
+        GameObject platform = Instantiate(moving_platformprefab, new Vector2(14.63f, randomxpos), Quaternion.identity);
+
+        platformsSpawned++; // Increase the spawned platform counter
+
+        bool spawnApple = platformsSpawned % platformsToSpawn == 0 && platformsSpawned % platformCountForTrap != 0;
+        bool spawnTrap = platformsSpawned % platformCountForTrap == 0 && platformsSpawned % platformsToSpawn != 0;
+
+        if (spawnApple)
+        {
+            // Spawn an apple on the platform
+            GameObject apple = Instantiate(applesprefab, platform.transform.position + new Vector3(0f, 1.0f, 0f), Quaternion.identity);
+            apple.transform.SetParent(platform.transform);
+        }
+
+        if (spawnTrap)
+        {
+            // Spawn a trap on the platform
+            GameObject trap = Instantiate(trapprefab, platform.transform.position + new Vector3(Random.Range(-2.0f, 2f), 1.0f, 0f), Quaternion.identity);
+            trap.transform.SetParent(platform.transform);
+        }
+
+        if (!spawnApple && !spawnTrap)
+        {
+            // Neither apple nor trap need to be spawned, so destroy the empty platform
+            Destroy(platform);
+        }
+
+        // Enable/disable the capsule collider every frameCountForCollider frames
+        frameCounter++;
+        if (frameCounter % frameCountForCollider == 0)
+        {
+            Collider2D capsuleCollider = platform.GetComponentInChildren<CapsuleCollider2D>();
+            if (capsuleCollider != null)
+            {
+                capsuleCollider.enabled = !capsuleCollider.enabled;
+            }
+        }
+    }*/
+
+
 
 }
 

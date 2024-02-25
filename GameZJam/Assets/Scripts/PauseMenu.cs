@@ -32,6 +32,10 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
+        if (!GameIsPaused)
+        {
+            Time.timeScale = 1f;
+        }
     }
     public void Resume()
     {

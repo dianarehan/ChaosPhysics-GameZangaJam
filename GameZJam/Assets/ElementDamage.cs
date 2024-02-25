@@ -23,4 +23,13 @@ public class ElementDamage : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Update()
+    {
+        // Check if the element's y position is less than -15
+        if (transform.position.y < -15f)
+        {
+            // Destroy the element
+            Destroy(gameObject);
+        }
+    }
 }
